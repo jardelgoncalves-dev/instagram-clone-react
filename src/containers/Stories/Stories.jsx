@@ -26,7 +26,7 @@ const Stories = ({ stories, getUserHandler }) => {
       <section className="stories" data-testid="stories">
         <div className="container">
           {stories.map((story, index) => {
-            const profileData = getUserHandler(story.userId);
+            const profileData = getUserHandler(story.id);
 
             return (
               <button
@@ -34,9 +34,11 @@ const Stories = ({ stories, getUserHandler }) => {
                 onClick={() => handleStory(story)}
                 className={`user__thumb ${index === 0 && 'user__thumb--hasNew'}`}
               >
-                <div className="user__thumb__wrapper">
-                  <img src={profileData.avatar} alt={profileData.name} />
-                </div>
+                {profileData && (
+                  <div className="user__thumb__wrapper">
+                    <img src={profileData.avatar} alt={profileData.name} />
+                  </div>
+                )}
               </button>
             )})
           }
